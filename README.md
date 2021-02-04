@@ -46,9 +46,24 @@ export default {
 }
 ```
 
+### Hooks
+
+- created()   => Ejecutado cuando el componente se crea pero no ha acabado de cargarse todo.
+- mounted()   => Ejecutado cuando el componente se monta.
+- updated()   => Ejecutado cada vez que algún dato del componente se actualiza.
+- destroyed() => Ejecutado cuando el componente se elimina de la vista de la página.
+- data() {return{param:null}} => Contiene las variables custom del componente.
+
+### Propiedades 
+
+- Methods:{} => Contiene todos los métodos custom del componente
+
 ## Routing
 
 - `npm install --save vue-router`
+
+### Navegación
+
 - en main.js `import VueRouter from 'vue-router'`
 - Definir las rutas:
 ```javascript
@@ -73,7 +88,45 @@ new Vue({
 }).$mount('#app')
 ```
 
+### Parámetros por URL
+
+- En el routing de main.js: 
+`{path: '/page/:param?', name: 'page', component: Page}`
+- En el componente encargado de los links:
+`<router-link :to="{name:'page', params: {param: 'I am the param value'}}">Page 1</router-link>`
+- En el componente de la página:
+```javascript
+export default {
+    name : 'Page',
+    mounted ()
+    {
+      this.id_from_url = this.$route.params.param;
+    },
+    data()
+    {
+      return {param_from_url: null}
+    }
+}
+```
+
+### Redirección via JS
+
+`this.$router.push('/page');`
+
+### 404 Page
+
+- En el routing de main.js: `{path: '*',component: ErrorComp}`
+
 ## Vistas y Directivas
+
+- two-way data binding: `<input type="text" v-model="parameter" />`
+- Condicional if: 
+```javascript
+<p v-if="parameter && parameter >=18">{{parameter}}</p>
+<p v-else-if="parameter && parameter >=65">{{parameter}}</p>
+<p v-else>{{parameter}}</p>
+```
+- Iterativo for `<li v-for="p in params" :key="p">{{p}}</li>`
 
 ## Props
 
