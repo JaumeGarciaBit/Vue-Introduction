@@ -56,8 +56,11 @@ export default {
 
 - name: 'Component' => nombrel componente.
 - Methods:{ } => Contiene todos los métodos custom del componente.
+- computed: { } => Propiedades computadas. Contiene los métodos que modifican parámetros y devuelven un valor.
 - components: { } => Contiene los componentes hijos importados.
-- props: ['param1' ,'param2'] => parámetros que serán recividos desde el padre.
+- props: ['param1' ,'param2'] => Parámetros que serán recividos desde el padre.
+- filters: { } => Pipes. filtran o modifican los parámetros en HTML
+- validations { } => configuración de los validators del form importados desde la librería de vuelidator.
 
 ## Routing
 
@@ -198,7 +201,66 @@ export default {
 
 ## Filtros
 
+- Filtran y modifican parámetros desde el HTML
+```javascript
+    filters:
+    {
+        toMayus(value)
+        {
+            return value.toUpperCase();
+        }
+    },
+```
+
+```javascript
+<h2>{{param.name | toMayus}}</h2>
+```
+
 ## Formularios y validación
+
+### Formulario
+
+```javascript
+        <form v-on:submit.prevent="onSubmit()">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" v-model="param.name"/>
+          </div>
+          <div class="form-group radibuttons">
+            <input type="radio" name="genero" value="hombre" checked  v-model="param.genre" /> Hombre
+            <input type="radio" name="genero" value="mujer" v-model="param.genre"/> Mujer
+          </div>
+
+          <input type="submit" value="Enviar"/>
+        </form>
+      </section>
+```
+
+### Validación
+
+- Instalar librería de validación de Vue `npm install --save vuelidate`
+- Importar vuelidate en main.js:
+```javascript
+import Vuelidate from 'vuelidate';
+Vue.use(Vuelidate);
+```
+- Importar todas las librerías deseadas dentro del script del componente
+```javascript
+import { required, email, minLenght } from 'vuelidate/lib/validators';
+validations:
+{
+name:{required, minLength: minLength(3)},
+genre:{required},
+},
+```
+```javascript
+<div class="form-group">
+  <label for="nombre">Nombre</label>
+  <input type="text" name="nombre" v-model="param.name"/>
+  <div v-if="!$v.name.required"> Este campo es requerido</div>
+  <div v-if="!$v.name.minLength"> Este debe contener un mínimo de 3 carácteres</div>
+</div>
+```
 
 ## Eventos y reactividad
 
