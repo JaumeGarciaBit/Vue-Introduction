@@ -25,7 +25,7 @@
                             <router-link :to="{name:'page', params: {id: 'I am the param value'}}" active-class="active">Pagina 1</router-link>
                         </li>
                         <li>
-                            <router-link to="/my-component" active-class="active">Pagina 2</router-link>
+                            <router-link to="/videogames" active-class="active">Videogames</router-link>
                         </li>                            
                     </ul>
                 </nav>

@@ -7,6 +7,7 @@ import Blog from './components/Blog.vue';
 import FormComp from './components/FormComp.vue';
 import Page1 from './components/Page1.vue';
 import ErrorComp from './components/ErrorComp.vue';
+import Videogames from './components/Videogames.vue';
 
 Vue.config.productionTip = false;
 
@@ -16,6 +17,7 @@ const routes = [
   {path: '/home', component: LastArticles},
   {path: '/last-articles', component: LastArticles},
   {path: '/my-component', component: MyComponent},
+  {path: '/videogames', name:'Videogames', component: Videogames},
   {path: '/', component: LastArticles},
   {path: '/blog', component: Blog},
   {path: '/form', component: FormComp},
