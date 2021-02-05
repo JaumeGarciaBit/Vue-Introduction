@@ -9,8 +9,8 @@
 
 ## Crear componentes
 
-- Crear un nuevo archivo `MyComponent.vue`
-- añadir tags de template, script y style
+- Crear un nuevo archivo: `MyComponent.vue`
+- añadir tags de template, script y style:
 ```javascript
 <template>
     <div id='my-component'>
@@ -32,9 +32,7 @@ export default {
 <style>
 </style>
 ```
-
-- importar componente en App.vue
-
+- importar componente en App.vue:
 ```javascript
 import MyComponent from './components/MyComponent.vue';
 
@@ -56,7 +54,10 @@ export default {
 
 ### Propiedades 
 
-- Methods:{} => Contiene todos los métodos custom del componente
+- name: 'Component' => nombrel componente.
+- Methods:{ } => Contiene todos los métodos custom del componente.
+- components: { } => Contiene los componentes hijos importados.
+- props: ['param1' ,'param2'] => parámetros que serán recividos desde el padre.
 
 ## Routing
 
@@ -64,7 +65,7 @@ export default {
 
 ### Navegación
 
-- en main.js `import VueRouter from 'vue-router'`
+- en main.js: `import VueRouter from 'vue-router'`
 - Definir las rutas:
 ```javascript
 Vue.use(VueRouter);
@@ -73,7 +74,7 @@ const routes = [
   {path: '/last-articles', component: LastArticles},
 ];
 ```
-- Crear objeto de VueRouter
+- Crear objeto de VueRouter:
 ```javascript
 const router = new VueRouter({
   routes,
@@ -93,7 +94,9 @@ new Vue({
 - En el routing de main.js: 
 `{path: '/page/:param?', name: 'page', component: Page}`
 - En el componente encargado de los links:
-`<router-link :to="{name:'page', params: {param: 'I am the param value'}}">Page 1</router-link>`
+```javascript
+<router-link :to="{name:'page', params: {param: 'I am the param value'}}">Page 1</router-link>
+```
 - En el componente de la página:
 ```javascript
 export default {
@@ -126,9 +129,72 @@ export default {
 <p v-else-if="parameter && parameter >=65">{{parameter}}</p>
 <p v-else>{{parameter}}</p>
 ```
-- Iterativo for `<li v-for="p in params" :key="p">{{p}}</li>`
+- Iterativo for:
+```javascript
+<li v-for="p in params" :key="p">{{p}}</li>
+```
+### Binding de parámetros:
+
+```javascript
+<img :src="p.param1" :alt="p.param2" :title="p.param3" />
+```
+### Binding de parámetros condicional:
+
+```javascript
+<span :class="{greenClass:p.param > 1, redClass:p.param <= 1}">
+```
 
 ## Props
+
+- Pasar datos de un componente padre a un componente hijo (Input) y de un hijo al padre (Output)
+
+### Input
+
+- En el hijo:
+```javascript
+export default {
+    name: 'ChildComponent',
+    props: ['childParam']
+}
+```
+- En el padre:
+```javascript
+<ChildComponent :childParam="param"></ChildComponent>
+```
+```javascript
+export default {
+    name: "ParentComponent",
+    components:
+    {
+        ChildComponent
+    },
+    data(){
+    return {param:null}
+    }
+  }
+```
+### Output
+
+- En el hijo:
+```javascript
+ this.$emit('eventName', param);
+```
+- En el padre:
+```javascript
+<ChildComponent v-on:eventName="MethodToCall"></ChildComponent>
+```
+```javascript
+export default {
+    name: "ParentComponent",
+    methods:
+    {
+        MethodToCall(param)
+        {
+            this.recivedParam = param;
+        }
+    },
+ }
+```
 
 ## Filtros
 
