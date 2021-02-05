@@ -4,10 +4,10 @@
         <section id="content">
         <h1 class="subheader">Videogames</h1>
         <div class="favorita" v-if="favorite">
-            <h2>{{favorite.title}}</h2>
+            <h2>{{favorite.title | concatenaYear}}</h2>
         </div>
         <div id="articles">
-            <div v-for="v in videogames" :key="v.title">
+            <div v-for="v in VideogameToMayus" :key="v.title">
             <Videogame :v="v" v-on:favorite="FavoriteRecived"></Videogame>
             </div>
         </div>
@@ -34,6 +34,26 @@ export default {
         {
             this.favorite = v;
             console.log("Se ha ejecutado el evento en el padre", v);
+        }
+    },
+    computed:
+    {
+        VideogameToMayus()
+        {
+            let l_result = this.videogames;
+            for(let i = 0; i < l_result.length; i++)
+            {
+                l_result[i].title = l_result[i].title.toUpperCase();
+            }
+            return l_result;
+        }
+    },
+    filters:
+    {
+        concatenaYear(value)
+        {
+            let date = new Date();
+            return value+ " " + date.getFullYear();
         }
     },
     data() {

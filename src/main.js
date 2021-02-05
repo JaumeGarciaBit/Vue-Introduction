@@ -8,10 +8,13 @@ import FormComp from './components/FormComp.vue';
 import Page1 from './components/Page1.vue';
 import ErrorComp from './components/ErrorComp.vue';
 import Videogames from './components/Videogames.vue';
+import Vuelidate from 'vuelidate';
+
 
 Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
+Vue.use(Vuelidate);
 
 const routes = [
   {path: '/home', component: LastArticles},
