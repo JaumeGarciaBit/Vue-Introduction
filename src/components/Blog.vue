@@ -16,11 +16,39 @@
 import Sidebar from "./Sidebar.vue";
 import Slider from "./Slider.vue";
 
+import axios from 'axios';
+
 export default {
   name: "Blog",
   components: {
     Sidebar,
     Slider,
   },
+  mounted()
+  {
+    this.getArticles();
+  },
+  data()
+  {
+    return{
+      articles: []
+    }
+  },
+  methods:
+  {
+    getArticles()
+    {
+      axios.get('http://localhost:3900/api/articles')
+        .then(res=>
+        {
+          if(res.data.status == 'success')
+          {
+            this.articles = res.data.articles;
+
+            console.log(this.articles);
+          }
+        });
+    }
+  }
 };
 </script>
