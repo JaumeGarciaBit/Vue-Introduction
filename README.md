@@ -262,6 +262,23 @@ genre:{required},
 </div>
 ```
 
-## Eventos y reactividad
-
 ## Peticiones HTTP
+
+- `npm install --save axios`
+- En el componente que hará las peticiones:
+```javascript
+import axios from 'axios';
+
+ methods:
+  {
+    getFromApi()
+    {
+      axios.get([the url of API])
+        .then(res=>
+        {
+          console.log(res.data);
+        });
+    }
+  }
+
+```
