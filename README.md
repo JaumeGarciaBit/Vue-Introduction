@@ -296,14 +296,11 @@ methods:
 }
 ```
 
+## Alertas
 
+- `npm install --save sweetalert`
+- ```javascript
+import swal from 'sweetalert';
 
-
-
-
-
-
-
-
-
-
+swal(Title, Subtitle, 'success');
+```
