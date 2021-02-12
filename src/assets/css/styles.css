@@ -228,7 +228,7 @@ body {
     font-size: 17px;
 }
 
-input[type="text"],
+input[type="text"], input[type="file"],
 textarea{
     width: 100%;
     min-height: 30px;
@@ -239,6 +239,7 @@ textarea{
 }
 
 input[type="text"]:focus,
+input[type="file"]:focus,
 textarea:focus{
     box-shadow: 0px 0px 5px #eee inset;
 }

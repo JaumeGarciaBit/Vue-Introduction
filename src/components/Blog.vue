@@ -4,7 +4,10 @@
 
     <div class="center">
       <section id="content">
-        <h2 class="subheader">Blog</h2>
+        <h1 class="subheader">Blog</h1>
+        <div id="articles" v-if='articles'>
+          <Articles v-bind:articles="articles"></Articles>
+        </div>
       </section>
       <Sidebar></Sidebar>
       <div class="clearfix"></div>
@@ -15,40 +18,38 @@
 <script>
 import Sidebar from "./Sidebar.vue";
 import Slider from "./Slider.vue";
+import Articles from "./Articles.vue";
 
-import axios from 'axios';
+import axios from "axios";
+import Global from "../global.js";
+
 
 export default {
   name: "Blog",
   components: {
     Sidebar,
     Slider,
+    Articles
   },
-  mounted()
-  {
+  mounted() {
     this.getArticles();
   },
-  data()
-  {
-    return{
+  data() {
+    return {
+      url : Global.url,
       articles: []
-    }
+    };
   },
-  methods:
-  {
-    getArticles()
-    {
-      axios.get('http://localhost:3900/api/articles')
-        .then(res=>
-        {
-          if(res.data.status == 'success')
-          {
-            this.articles = res.data.articles;
+  methods: {
+    getArticles() {
+      axios.get(this.url+"articles").then((res) => {
+        if (res.data.status == "success") {
+          this.articles = res.data.articles;
 
-            console.log(this.articles);
-          }
-        });
-    }
-  }
+          console.log(this.articles);
+        }
+      });
+    },
+  },
 };
 </script>
