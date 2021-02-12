@@ -14,6 +14,9 @@
                 <p>{{article.content}}</p>
 
                 <div class="clearfix"></div>
+
+                <router-link to='/edit' class='btn btn-warning'>Edit</router-link>
+                <router-link to='/delete' class='btn btn-danger'>Delete</router-link>
             </article>
         </section>
         <Sidebar></Sidebar>

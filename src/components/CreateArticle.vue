@@ -3,6 +3,7 @@
 <script>
 import axios from 'axios';
 import { required } from 'vuelidate/lib/validators';
+import swal from 'sweetalert';
 
 import Sidebar from "./Sidebar.vue";
 
@@ -67,6 +68,8 @@ export default {
                                         console.log(res.data);
                                         if(res.data.articleUpdated)
                                         {
+                                            swal('Articulo creado', 'El artículo se ha creado correctamente', 'success');
+
                                             this.article = res.data.article;
                                             this.$router.push('/blog');
                                         }
@@ -75,6 +78,9 @@ export default {
                             }
                             else
                             {
+                                swal('Articulo creado', 'El artículo se ha creado correctamente', 'success');
+
+
                                 this.article = res.data.article;
                                 this.$router.push('/blog');
                             }
@@ -83,7 +89,7 @@ export default {
                     })
                     .catch(err =>
                     {
-                        console.log(err);
+                        swal('Creación fallida', err , 'error');
                     });
             }
 

@@ -209,6 +209,16 @@ body {
 .btn-success{
     background: rgb(23, 150, 19);
 }
+.btn-warning{
+    background: rgb(214, 177, 11);
+    color: white  !important;
+    text-align: center;
+}
+.btn-danger{
+    background: rgb(201, 25, 25);
+    color: white  !important;
+    text-align: center;
+}
 
 .btn-success:hover{
     background:black;
