@@ -13,7 +13,7 @@ import ArticleClass from '../models/ArticleClass.js';
 
 
 export default {
-    name:'CreateArticle',
+    name:'EditArticle',
     components: {
         Sidebar,
     },
@@ -24,7 +24,8 @@ export default {
             url: Global.url,
             submitted: false,
             file: '',
-            isEdit:false
+            isEdit:true,
+            articleID: ''
         }
     },
     validations:
@@ -37,10 +38,23 @@ export default {
     },
     mounted()
     {
-        // console.log(this.article);
+        this.articleID =this.$route.params.id;
+        this.getArticle(this.articleID);
     },
     methods:
     {
+        getArticle(articleID)
+        {
+            axios.get(this.url + 'article/' +articleID)
+                .then(res =>
+                {
+                    if(res.data.status == 'success')
+                    {
+                        this.article = res.data.article;
+                        console.log(this.article);
+                    }
+                });
+        },
         OnSubmit()
         {
             this.submitted=true;
@@ -52,8 +66,7 @@ export default {
             }
             else
             {
-
-                axios.post(this.url + 'save', this.article)
+                axios.put(this.url + 'article/' + this.articleID, this.article)
                     .then(res =>
                     {
                         if(res.data.status == 'success')
@@ -68,28 +81,28 @@ export default {
                                     {
                                         if(res.data.articleUpdated)
                                         {
-                                            swal('Articulo creado', 'El artículo se ha creado correctamente', 'success');
+                                            swal('Articulo editado', 'El artículo se ha editado correctamente', 'success');
 
                                             this.article = res.data.article;
-                                            this.$router.push('/blog');
+                                            this.$router.push('/article/' + this.articleID);
                                         }
                                     });
 
                             }
                             else
                             {
-                                swal('Articulo creado', 'El artículo se ha creado correctamente', 'success');
+                                swal('Articulo editado', 'El artículo se ha editado correctamente', 'success');
 
 
                                 this.article = res.data.article;
-                                this.$router.push('/blog');
+                                this.$router.push('/article/' + this.articleID);
                             }
 
                         }
                     })
                     .catch(err =>
                     {
-                        swal('Creación fallida', err , 'error');
+                        swal('Edición fallida', err , 'error');
                     });
             }
 

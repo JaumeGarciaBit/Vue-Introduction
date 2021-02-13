@@ -10,6 +10,7 @@ import Page1 from './components/Page1.vue';
 import ErrorComp from './components/ErrorComp.vue';
 import Search from './components/Search.vue';
 import CreateArticle from './components/CreateArticle.vue';
+import EditArticle from './components/EditArticle.vue';
 import Redirect from './components/Redirect.vue';
 import Videogames from './components/Videogames.vue';
 import Vuelidate from 'vuelidate';
@@ -27,6 +28,7 @@ const routes = [
   {path: '/last-articles', component: LastArticles},
   {path: '/article/:id', name:'article', component: Details},
   {path: '/create-article', name:'create', component: CreateArticle},
+  {path: '/edit-article/:id', name:'edit', component: EditArticle},
   {path: '/my-component', component: MyComponent},
   {path: '/videogames', name:'Videogames', component: Videogames},
   {path: '/', component: LastArticles},
