@@ -286,7 +286,7 @@ import axios from 'axios';
 ## Subida de archivos
 
 - `<input type="file" name='file0' id='file' ref='file' v-on:change='fileChange()'/>`
-- ```javascript
+```javascript
 methods:
 {
     fileChange()
