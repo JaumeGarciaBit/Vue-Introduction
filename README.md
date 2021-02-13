@@ -299,8 +299,32 @@ methods:
 ## Alertas
 
 - `npm install --save sweetalert`
-- ```javascript
+- Aviso normal:
+```javascript
 import swal from 'sweetalert';
 
 swal(Title, Subtitle, 'success');
+```
+- Aviso con confirmación:
+```javascript
+swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => 
+    {
+      if (willDelete) 
+      {
+        swal("Poof! Your imaginary file has been deleted!", { icon: "success" });
+        //Your code when accepting here
+      } 
+      else 
+      {
+        swal("Your imaginary file is safe!");
+        //Your code when cancelling here
+      }
+    });
 ```
